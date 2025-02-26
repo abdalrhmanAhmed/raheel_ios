@@ -1,0 +1,35 @@
+workflows:
+  ios-workflow:
+    name: iOS Build
+    instance_type: mac_mini_m2
+    max_build_duration: 120
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    triggering:
+      events:
+        - push
+        - pull_request
+      branch_patterns:
+        - pattern: main
+          include: true
+          source: true
+    scripts:
+      - name: Set iOS deployment target
+        script: |
+          sed -i '' 's/platform :ios, .*/platform :ios, "14.0"/' ios/Podfile
+      - name: Install dependencies
+        script: |
+          flutter pub get
+      - name: Install CocoaPods dependencies
+        script: |
+          cd ios
+          rm -rf Podfile.lock Pods
+          pod install --repo-update
+      - name: Build iOS app
+        script: |
+          flutter build ios --no-codesign
+    artifacts:
+      - build/ios/iphoneos/*.app
+      - build/ios/ipa/*.ipa
