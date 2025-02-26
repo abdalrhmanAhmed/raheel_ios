@@ -60,7 +60,7 @@ dependencies:
   material_design_icons_flutter: ^7.0.7296
   url_launcher: ^6.2.5
   font_awesome_flutter: ^10.7.0
-  audioplayers: ^6.2.0
+  #audioplayers: ^6.2.0
   rename: ^3.0.2
   audioplayers_darwin: ^6.1.0
 
