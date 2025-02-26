@@ -42,17 +42,17 @@ dependencies:
   fab_circular_menu: ^1.0.2
   permission_handler: ^11.3.0
   animations: ^2.0.11
-  timezone: ^0.9.2
+  timezone: ^0.10.0
   animator: ^3.2.1
   dropdown_button2: ^2.3.9
   flutter_svg: ^2.0.10
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.3
   html: ^0.15.4
   video_player: ^2.8.2
   google_maps_flutter: ^2.6.0
   galleryimage: ^2.0.0
-  youtube_player_flutter: ^8.1.2
-  flutter_inappwebview: ^5.8.0
+  youtube_player_flutter: ^9.1.1
+  flutter_inappwebview: ^6.1.5
   path_provider: ^2.1.2
   open_file: ^3.3.2
   flutter_html: ^3.0.0-beta.2
@@ -60,14 +60,14 @@ dependencies:
   material_design_icons_flutter: ^7.0.7296
   url_launcher: ^6.2.5
   font_awesome_flutter: ^10.7.0
-  audioplayers: ^5.2.1
+  audioplayers: ^6.2.0
   rename: ^3.0.2
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
 
 flutter:
   uses-material-design: true
