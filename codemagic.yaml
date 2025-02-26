@@ -1,30 +1,42 @@
 workflows:
-  ios-workflow:
+  ios-build:
     name: iOS Build
     instance_type: mac_mini_m2
-    max_build_duration: 60
+    max_build_duration: 120
     environment:
       flutter: stable
       xcode: latest
-      cocoapods: default
-      vars:
-        BUNDLE_ID: "com.example.raheelIos"
+    triggering:
+      events:
+        - push
+        - pull_request
+      branch_patterns:
+        - pattern: "*"
+          include: true
+          source: true
     scripts:
-      - name: Clean Flutter & Install Dependencies
+      - name: Clean Project
         script: |
           flutter clean
-          flutter pub get
+          rm -rf ios/Pods ios/Podfile.lock ios/.symlinks ios/Flutter/Flutter.podspec
           cd ios
-          rm -rf Pods Podfile.lock
+          pod deintegrate
           pod install --repo-update
           cd ..
-      - name: Build iOS App
-        script: flutter build ios --debug --no-codesign
+      - name: Install Dependencies
+        script: |
+          flutter pub get
+      - name: Build iOS
+        script: |
+          flutter build ios --debug --no-codesign
     artifacts:
       - build/ios/iphoneos/*.app
       - build/ios/iphoneos/*.ipa
     publishing:
       email:
         recipients:
-          - "se.abdalrhmanahmed@gmail.com"
+          - "your-email@example.com"
+        notify:
+          success: true
+          failure: true
 
