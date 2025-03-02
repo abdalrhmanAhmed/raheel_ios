@@ -9,16 +9,20 @@ workflows:
       - name: Clean project
         script: |
           flutter clean
-          rm -rf ios/Pods ios/Podfile.lock
-          flutter pub cache repair
+          rm -rf ios/Pods ios/Podfile.lock pubspec.lock
       - name: Get dependencies
         script: flutter pub get
+      - name: Update package versions
+        script: flutter pub upgrade --major-versions
+      - name: Fix wakelock issue
+        script: flutter pub remove wakelock
+      - name: Reinstall wakelock properly
+        script: flutter pub add wakelock
       - name: Install CocoaPods dependencies
         script: |
           cd ios
-          pod deintegrate
-          pod setup
-          pod install --repo-update --verbose
+          pod repo update
+          pod install --verbose
           cd ..
       - name: Build iOS app
         script: flutter build ios --no-codesign
