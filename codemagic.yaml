@@ -10,12 +10,15 @@ workflows:
         script: |
           flutter clean
           rm -rf ios/Pods ios/Podfile.lock
+          flutter pub cache repair
       - name: Get dependencies
         script: flutter pub get
       - name: Install CocoaPods dependencies
         script: |
           cd ios
-          pod install --repo-update
+          pod deintegrate
+          pod setup
+          pod install --repo-update --verbose
           cd ..
       - name: Build iOS app
         script: flutter build ios --no-codesign
