@@ -12,15 +12,17 @@ workflows:
           rm -rf ios/Pods ios/Podfile.lock pubspec.lock
       - name: Get dependencies
         script: flutter pub get
-      - name: Update package versions
-        script: flutter pub upgrade --major-versions
+      - name: Repair Flutter cache
+        script: flutter pub cache repair
       - name: Fix wakelock issue
-        script: flutter pub remove wakelock
-      - name: Reinstall wakelock properly
-        script: flutter pub add wakelock
-      - name: Install CocoaPods dependencies
+        script: |
+          flutter pub remove wakelock
+          flutter pub add wakelock
+          flutter pub get
+      - name: Remove and reinstall CocoaPods
         script: |
           cd ios
+          pod deintegrate
           pod repo update
           pod install --verbose
           cd ..
