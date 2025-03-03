@@ -14,11 +14,11 @@ workflows:
         script: flutter pub get
       - name: Repair Flutter cache
         script: flutter pub cache repair
-      - name: Fix wakelock issue
-        script: |
-          flutter pub remove wakelock
-          flutter pub add wakelock
-          flutter pub get
+      # - name: Fix wakelock issue
+      #   script: |
+      #     flutter pub remove wakelock
+      #     flutter pub add wakelock
+      #     flutter pub get
       - name: Remove and reinstall CocoaPods
         script: |
           cd ios
